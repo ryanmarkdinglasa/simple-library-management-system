@@ -1,25 +1,26 @@
 # library-management-system
 Library Manage System
 
-**Requirements
+**Requirements**
 ***
 Composer
 Node JS 
 XAMPP
 
-**Steps to start
-
+**Steps to start**
+***
 1. Install all requirements
 2. import the database [lms.sql]
 3. open dir folder of the project, press alt + d . open cmd
 4. enter npm run start
 
 
-**Credentials
-*Administrator*
+**Credentials**
+***
+**Administrator**
 username: admin
 password: admin
 
-*Default Student*
+**Default Student**
 username: tester101
 password: 12345 // default password
