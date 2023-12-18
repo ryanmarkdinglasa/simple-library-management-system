@@ -16,10 +16,10 @@ XAMPP
 
 
 **Credentials
-Administrator
+*Administrator*
 username: admin
 password: admin
 
-Default Student
+*Default Student*
 username: tester101
 password: 12345 // default password
