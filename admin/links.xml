@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pages>
+  <link>
+    <title>Admin List</title>
+    <url>admin.php</url>
+  </link>
+
+  <link>
+    <title>Registrar List</title>
+    <url>registrar.php</url>
+  </link>
+
+  <link>
+    <title>Faculty List</title>
+    <url>faculty.php</url>
+  </link>
+
+  <link>
+    <title>Students List</title>
+    <url>student.php</url>
+  </link>
+
+  <link>
+    <title>Institute</title>
+    <url>intitute.php</url>
+  </link>
+
+  <link>
+    <title>Academic Year</title>
+    <url>period.php</url>
+  </link>
+
+  <link>
+     <title>Announcement</title>
+     <url>announcement.php</url>
+  </link>
+
+  <link>
+    <title>Feedback</title>
+    <url>feedback.php</url>
+  </link>
+
+  <link>
+    <title>My Profile</title>
+    <url>profile.php</url>
+  </link>
+
+  <link>
+    <title>Calendar</title>
+    <url>calendar.php</url>
+  </link>
+
+  <link>
+     <title>User Login History</title>
+     <url>userlog.php</url>
+  </link>
+</pages>

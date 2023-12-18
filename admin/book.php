@@ -1,0 +1,296 @@
+  <?php
+    	error_reporting(E_ALL);
+    session_start();
+    include("include/session.php");
+    $parentpage = "";
+    $parentpage_link= "#";
+    $currentpage='Book';
+    $childpage = $page = "Book";
+    include("include/header.php");
+    $content_right='';
+    $content_right='<a type="button" data-toggle="modal" data-target="#modal-form" class="btn btn-round btn-icon bg-white text-primary" >
+                      <span class="btn-inner--icon text-primary font-weight-bolder"><i class="fas fa-plus"></i></span>
+                      <span class="btn-inner--text text-primary font-weight-bolder"> New</span>
+                    </a>';
+  ?>
+  </head>
+  <?php include("include/sidebar.php"); ?>
+    <div class="main-content" id="panel">
+      <?php
+        include("include/topnav.php"); 
+        include("include/snackbar.php"); 
+        include "include/breadcrumbs.php";
+      ?>
+    <!--ADD MODAL-->
+    <div class="col-md-4">
+      <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document">
+          <div class="modal-content">
+            <div class="modal-body p-0">
+              <div class="card bg-blue border-0 mb-0">
+                <div class="card-body px-lg-5 py-lg-5">
+                  <div class="text-center form-control-label mb-4 text-white">
+                    <span>Add New Book</span>
+                  </div>
+                  <form action="book_controller.php" role="form" method="post">
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group mb-2">
+                          <label class="form-control-label mb-0 text-white">Title </label>
+                          <div class="input-group input-group-merge input-group-alternative">
+                            <input id="title" name="title" class="form-control" placeholder="Title" type="text" title="Enter title" oninvalid="this.setCustomValidity('Please enter the new book title.')" oninput="setCustomValidity('')" required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group mb-2">
+                          <label class="form-control-label mb-0 text-white">ISBN </label>
+                          <div class="input-group input-group-merge input-group-alternative">
+                            <input id="isbn" name="isbn" class="form-control" placeholder="ISBN" type="text" title="Enter isbn" oninvalid="this.setCustomValidity('Please enter the new book ISBN.')" oninput="setCustomValidity('')" required>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                        <div class="form-group mb-2">
+                          <label class="form-control-label mb-0 text-white">Author </label>
+                          <div class="input-group input-group-merge input-group-alternative">
+                            <input id="author" name="author" class="form-control" placeholder="Author" type="text" title="Enter author" oninvalid="this.setCustomValidity('Please enter the author.')" oninput="setCustomValidity('')" required>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group mb-2">
+                          <label class="form-control-label mb-0 text-white">Genre </label>
+                          <div class="input-group input-group-merge input-group-alternative">
+                            <input id="genre" name="genre" class="form-control" placeholder="Genre" type="text" title="Enter genre" oninvalid="this.setCustomValidity('Please enter the genre.')" oninput="setCustomValidity('')" required>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col">
+                          <div class="form-group mb-2">
+                              <label class="form-control-label mb-0 text-white">Price</label>
+                              <div class="input-group input-group-merge input-group-alternative">
+                                  <input id="book_price" name="book_price" class="form-control" placeholder="Price" type="text" pattern="[0-9]+([.,][0-9]{1,2})?" title="Enter book's price (e.g., 10 or 10.99)" oninvalid="this.setCustomValidity('Please enter a valid price.')" oninput="setCustomValidity('')" required>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col">
+                        <div class="form-group mb-2">
+                          <label class="form-control-label mb-0 text-white">Quantity </label>
+                          <div class="input-group input-group-merge input-group-alternative">
+                            <input id="quantity" name="quantity" class="form-control" placeholder="Quantity" type="number" title="Enter quantity" oninvalid="this.setCustomValidity('Please enter the quantity.')" oninput="setCustomValidity('')" required>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="text-right">
+									      <button type="reset" id="cancel-button" class="btn btn-primary my-4 sp-add bg-secondary text-primary font-weight-bolder" >Cancel</button>
+                        <button type="submit" id="add" name="add" class="btn btn-primary my-4 sp-add bg-white text-primary font-weight-bolder" >Save</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--END ADD MODAL-->
+    <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header border-0">
+              <div class="row">
+                <div class="col-6">
+                  <h3 class="mb-0">Book List</h3>
+                </div>
+                <div class="col-6 text-right">
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive">
+               <table class="table align-items-center table-flush table-striped" id="datatable-buttons">
+                <thead class="thead-light">
+                  <tr>
+                    <th>No.</th>
+                    <th>Title</th>
+                    <th>ISBN</th>
+                    <th>Author</th>
+                    <th>Price</th>
+					          <th>Genre</th>
+                    <th>Qty</th>
+                    <th>Date Registered</th>
+                    <th>Option</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <?php 
+                    try{
+                      $stmt = $con->prepare("SELECT * FROM `book`");
+                      $stmt->execute();
+                      $cnt = 1;
+                      while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                  ?>
+                    <tr>
+                      <td>
+                          <label class="text-muted"><?php echo $cnt;?></label>
+                      </td>
+                      <td >
+                        <?php $title=(empty($row['title']) ||$row['title']==NULL)?'':$row['title']; ?>
+                        <label class="font-weight-bold"><?php echo htmlentities(short_text($title)); ?></label>
+                      </td>
+                      <td >
+                        <?php $isbn=(empty($row['isbn']) ||$row['isbn']==NULL)?'':$row['isbn']; ?>
+                        <label class="font-weight-bold"><?php echo htmlentities(short_text($isbn)); ?></label>
+                      </td>
+                      <td >
+                        <?php $author=(empty($row['author']) ||$row['author']==NULL)?'':$row['author']; ?>
+                        <label class="font-weight-bold"><?php echo htmlentities(short_text($author)); ?></label>
+                      </td>
+                      <td>
+                        <?php 
+                            $price = (!isset($row['book_price']) || $row['book_price'] == 0) ? '0.00' : number_format($row['book_price'], 2);
+                        ?>
+                        <label class="font-weight-bold">&#8369; <?php echo htmlentities($price); ?></label>
+                      </td>
+                      <td >
+                        <?php $genre=(empty($row['genre']) ||$row['genre']==NULL)?'':$row['genre']; ?>
+                        <label class="font-weight-bold"><?php echo htmlentities(short_text($genre)); ?></label>
+                      </td>
+                      <td>
+                        <?php 
+                            $quantity = (!isset($row['quantity']) || $row['quantity'] == 0) ? '' : ($row['quantity']);
+                        ?>
+                        <label class="font-weight-bold"> <?php echo htmlentities($quantity); ?></label>
+                      </td>
+					            <td>
+                        <span class="text-muted">
+                          <?php
+                            $date=(empty($row['created_on']) ||$row['created_on']==NULL)?'':$row['created_on'];
+                            $created_on = isset( $date) ? htmlspecialchars(created_on($date), ENT_QUOTES, 'UTF-8') : '';
+                          ?>
+                          <label title="<?php echo formatDate($date); ?>"> <?php echo $created_on; ?></label>
+                        </span>
+                      </td>
+                     
+                      <td class="text-right">
+                        <div class="dropdown">
+                          <a class="btn btn-sm btn-icon-only bg-light rounded-circle shadow text-primary" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v"></i>
+                          </a>
+                          <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow"> 
+                            <a class="dropdown-item text-black" data-id="<?php echo $row['id'] ?>" type="button" data-toggle="modal" data-target="#modal-edit-form<?php echo $row['id']; ?>"><i class="fas fa-pen text-primary"  ></i> Edit </a>
+                            <a class="dropdown-item" href="book_controller.php?id=<?php echo $row['id']?>&del=delete" onClick="return confirm('Are you sure you want to remove, <?php echo htmlspecialchars($row['title']);?> ?')"><i class="fas fa-trash text-primary" ></i> Delete</a>	
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <div class="col-md-4">
+                      <div class="modal fade" id="modal-edit-form<?php echo $row['id'];?>" tabindex="-1" role="dialog" aria-labelledby="modal-edit-form" aria-hidden="true">
+                        <div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document">
+                          <div class="modal-content">
+                            <div class="modal-body p-0">
+                              <div class="card bg-blue border-0 mb-0">
+                                <div class="card-body px-lg-5 py-lg-5">
+                                  <div class="text-center text-white font-weight-bolder form-control-label mb-4">
+                                    <span>Edit Program</span>
+                                  </div>
+                                  <form role="form" method="post" action="book_controller.php">
+                                    <input id="edit_id" name="edit_id" class="id form-control" value="<?php echo $row['id']?>"  type="hidden" required>
+                                    <div class="row">
+                                      <div class="col">
+                                        <div class="form-group mb-2">
+                                          <label class="form-control-label mb-0 text-white">Title </label>
+                                          <div class="input-group input-group-merge input-group-alternative">
+                                            <input  value="<?php echo htmlspecialchars($row['title']);?>" id="edit_title" name="edit_title" class="form-control" placeholder="Title" type="text" title="Enter title" oninvalid="this.setCustomValidity('Please enter the new book title.')" oninput="setCustomValidity('')" required>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col">
+                                        <div class="form-group mb-2">
+                                          <label class="form-control-label mb-0 text-white">ISBN </label>
+                                          <div class="input-group input-group-merge input-group-alternative">
+                                            <input  value="<?php echo htmlspecialchars($row['isbn']);?>" id="edit_isbn" name="edit_isbn" class="form-control" placeholder="ISBN" type="text" title="Enter isbn" oninvalid="this.setCustomValidity('Please enter the new book ISBN.')" oninput="setCustomValidity('')" required>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col">
+                                        <div class="form-group mb-2">
+                                          <label class="form-control-label mb-0 text-white">Author </label>
+                                          <div class="input-group input-group-merge input-group-alternative">
+                                            <input  value="<?php echo htmlspecialchars($row['author']);?>" id="edit_author" name="edit_author" class="form-control" placeholder="Author" type="text" title="Enter author" oninvalid="this.setCustomValidity('Please enter the author.')" oninput="setCustomValidity('')" required>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col">
+                                        <div class="form-group mb-2">
+                                          <label class="form-control-label mb-0 text-white">Genre </label>
+                                          <div class="input-group input-group-merge input-group-alternative">
+                                            <input  value="<?php echo htmlspecialchars($row['genre']);?>" id="edit_genre" name="edit_genre" class="form-control" placeholder="Genre" type="text" title="Enter genre" oninvalid="this.setCustomValidity('Please enter the genre.')" oninput="setCustomValidity('')" required>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="row">
+                                      <div class="col">
+                                        <div class="form-group mb-2">
+                                          <label class="form-control-label mb-0 text-white">Price </label>
+                                          <div class="input-group input-group-merge input-group-alternative">
+                                            <input  value="<?php echo htmlspecialchars($row['book_price']);?>" id="edit_book_price" name="edit_book_price" class="form-control" placeholder="Price" type="number" title="Enter book's price" oninvalid="this.setCustomValidity('Please enter the price.')" oninput="setCustomValidity('')" required>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="col">
+                                        <div class="form-group mb-2">
+                                          <label class="form-control-label mb-0 text-white">Quantity </label>
+                                          <div class="input-group input-group-merge input-group-alternative">
+                                            <input  value="<?php echo htmlspecialchars($row['quantity']);?>" id="edit_quantity" name="edit_quantity" class="form-control" placeholder="Quantity" type="number" title="Enter quantity" oninvalid="this.setCustomValidity('Please enter the quantity.')" oninput="setCustomValidity('')" required>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+
+                                    <div class="text-right">
+                                      <button type="reset" id="cancel-button<?php echo $row['id'];?>" class="btn btn-primary my-4 sp-add bg-secondary text-primary font-weight-bolder" >Cancel</button>
+                                      <button type="submit" id="edit" name="edit" class="btn btn-primary my-4 bg-white text-primary font-weight-bolder">Save</button>
+                                    </div>
+                                  </form>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <script>
+                          document.addEventListener("DOMContentLoaded", function () {
+                            var cancelButton = document.getElementById("cancel-button<?php echo $row['id'];?>");
+                            var modal = document.getElementById("modal-edit-form<?php echo $row['id'];?>");
+                            cancelButton.addEventListener("click", function () {
+                              $(modal).modal("hide");
+                            });
+                          });
+                        </script>
+                      </div>
+                  <?php $cnt = $cnt + 1;
+                  } //while
+                }catch(Exception $e){
+                  $_SESSION['error']='Something went wrong in accessing book data.';
+                }
+                ?>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <?php include("include/footer.php"); ?>
+      </div>
+    </div>
+  </body>
+</html>
