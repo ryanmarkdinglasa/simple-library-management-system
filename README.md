@@ -15,7 +15,6 @@ A list of technologies used within the project:
 
 
 ## Credentials
-***
 * **Administrator**
 * username: admin
 * password: admin
