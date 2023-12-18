@@ -1,0 +1,73 @@
+@charset 'UTF-8';
+
+	:root
+	{
+		--blue: #5e72e4;
+		--indigo: #5603ad;
+		--purple: #8965e0;
+		--pink: #f3a4b5;
+		--red: #f5365c;
+		--orange: #fb6340;
+		--yellow: #ffd600;
+		--green: #01A985;
+		--green2: #128C7E;
+		--green3: #075E54;
+		--teal: #11cdef;
+		--cyan: #2bffc6;
+		--white: #fff;
+		--gray: #8898aa;
+		--gray-dark: #32325d;
+		--light: #ced4da;
+		--lighter: #e9ecef;
+		--primary: #193153;
+		--secondary: #f7fafc;
+		--success: #2dce89;
+		--info: #11cdef;
+		--warning: #fb6340;
+		--danger: #f5365c;
+		--light: #adb5bd;
+		--dark: #212529;
+		--default: #172b4d;
+		--white: #fff;
+		--neutral: #fff;
+		--darker: black;
+		--breakpoint-xs: 0;
+		--breakpoint-sm: 576px;
+		--breakpoint-md: 768px;
+		--breakpoint-lg: 992px;
+		--breakpoint-xl: 1200px;
+		--font-family-sans-serif: Open Sans, sans-serif;
+		--font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+	}
+	.poster h5{
+		margin:-42px 60px;
+	}
+	option-button{
+		border-radius:black;
+		margin:-40px 90%;
+		position:absolute;
+		text-align:right;
+		border-radius:10px;
+		
+	}
+	.text-black{
+		color:#000 !important;
+	}
+	svg{
+		fill:var(--primary);
+		
+	}
+	.cursor-pointer{
+		cursor:pointer;
+	}
+	.color-primary{
+		color:var(--primary);
+	}
+	.color-white{
+		color:var(--white);
+	}
+	.svg-icon{
+		position:absolute;
+		margin:15px -80px;
+		opacity:0.7;
+	}
