@@ -1,8 +1,5 @@
 # library-management-system
-Library Manage System
-## Technologies
-
-
+Simple Library Manage System
 
 ## Requirements
 A list of technologies used within the project:
@@ -25,4 +22,4 @@ A list of technologies used within the project:
 
 * **Default Student**
 * username: tester101
-*password: 12345 // default password
+* password: 12345 // default password
